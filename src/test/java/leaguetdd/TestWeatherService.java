@@ -1,4 +1,4 @@
-package leagueTest;
+package leaguetdd;
 
 //TestWeatherService.java
 import org.junit.Test;

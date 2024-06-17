@@ -1,4 +1,4 @@
-package leagueTest;
+package leaguetdd;
 
 //src/Calculator.java
 public class Calculator {

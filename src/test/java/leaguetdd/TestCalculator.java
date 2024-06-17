@@ -1,4 +1,4 @@
-package leagueTest;
+package leaguetdd;
 
 //test/TestCalculator.java
 import org.junit.Test;

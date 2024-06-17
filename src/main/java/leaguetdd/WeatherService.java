@@ -1,10 +1,13 @@
-package leagueTest;
+package leaguetdd;
 
 //WeatherService.java
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,21 +65,21 @@ public class WeatherService {
 
  private Map<String, Object> parseJson(String json) {
     Gson gson = new Gson();
-    return gson.fromJson(json);
-     Map<String, Object> data = new HashMap<>();
-     String tempKey = "\"temp\":";
-     String humidityKey = "\"humidity\":";
+    Map<String, Map> fromJson = gson.fromJson(json, Map.class);
+    Map<String, Object> data = new HashMap<>();
+    //  String tempKey = "\"temp\":";
+    //  String humidityKey = "\"humidity\":";
 
-     int tempIndex = json.indexOf(tempKey) + tempKey.length();
-     int tempEndIndex = json.indexOf(",", tempIndex);
-     double temperature = Double.parseDouble(json.substring(tempIndex, tempEndIndex).trim());
+    //  int tempIndex = json.indexOf(tempKey) + tempKey.length();
+    //  int tempEndIndex = json.indexOf(",", tempIndex);
+    //  double temperature = Double.parseDouble(json.substring(tempIndex, tempEndIndex).trim());
 
-     int humidityIndex = json.indexOf(humidityKey) + humidityKey.length();
-     int humidityEndIndex = json.indexOf("}", humidityIndex);
-     int humidity = Integer.parseInt(json.substring(humidityIndex, humidityEndIndex).trim());
-
-     data.put("temperature", temperature);
-     data.put("humidity", humidity);
+    //  int humidityIndex = json.indexOf(humidityKey) + humidityKey.length();
+    //  int humidityEndIndex = json.indexOf("}", humidityIndex);
+    //  int humidity = Integer.parseInt(json.substring(humidityIndex, humidityEndIndex).trim());
+    System.out.println(fromJson.get("main").get("temp"));
+    data.put("temperature", fromJson.get("main").get("temp"));
+    data.put("humidity",fromJson.get("main").get("humidity"));
 
      return data;
  }
