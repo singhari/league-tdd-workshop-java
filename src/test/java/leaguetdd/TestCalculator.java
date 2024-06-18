@@ -6,16 +6,12 @@ import org.junit.Test;
 
 public class TestCalculator {
 
-    // Test for the add method
-    @Test
-    public void testAdd() {
-        assertEquals(5, Calculator.add(2, 3));
-    }
+    // For all 3 test methods you will create remember to add @Test before the method 
 
-    // Test for the factorial method
-    @Test
-    public void testFactorial() {
-        assertEquals(120, Calculator.factorial(5));
-        assertEquals(1, Calculator.factorial(0));
-    }
+    // Create a Test for the add method called testAdd 
+
+    // Create a Test for the subtract method called testSubtract
+
+    // Create a Test for the factorial method called testFactorial
+
 }
