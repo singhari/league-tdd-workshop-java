@@ -2,6 +2,8 @@ package leaguetdd;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class WeatherService {
         this.cache = new HashMap<>();
     }
 
-    public Map<String, Object> getWeather(String city) throws IOException {
+    public Map<String, Object> getWeather(String city) {
         long currentTime = System.currentTimeMillis();
 
         // Check cache first
@@ -27,7 +29,16 @@ public class WeatherService {
                 return entry.data;
             }
         }
+        try {
+            return getWeatherFromApi(city);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    private Map<String, Object> getWeatherFromApi(String city)
+            throws MalformedURLException, IOException, ProtocolException {
         // Fetch new data
         URL url = new URL(
                 "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=4523628bd365a0c61f43c9ba0c9cd1ff");
@@ -49,13 +60,12 @@ public class WeatherService {
             scanner.close();
 
             // Print the JSON response for debugging
-            System.out.println("API Response: " + inline.toString());
-
-            // Parse JSON data manually
             String json = inline.toString();
+            System.out.println("API Response: " + json);
             Map<String, Object> weatherData = parseJson(json);
 
             // Update cache
+            long currentTime = System.currentTimeMillis();
             cache.put(city, new CacheEntry(weatherData, currentTime));
 
             return weatherData;

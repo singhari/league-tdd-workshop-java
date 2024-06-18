@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Test;
@@ -12,7 +11,7 @@ import org.junit.Test;
 public class TestWeatherService {
 
     @Test
-    public void testGetWeather() throws IOException {
+    public void testGetWeather() {
         WeatherService service = new WeatherService();
         Map<String, Object> data = service.getWeather("New York");
         System.out.println("Weather data: " + data);
@@ -22,7 +21,7 @@ public class TestWeatherService {
     }
 
     @Test
-    public void testGetWeatherCache() throws IOException {
+    public void testGetWeatherCache() {
         WeatherService service = new WeatherService();
         Map<String, Object> data1 = service.getWeather("New York");
         Map<String, Object> data2 = service.getWeather("New York");
@@ -30,7 +29,7 @@ public class TestWeatherService {
     }
 
     @Test
-    public void testHandleApiError() throws IOException {
+    public void testHandleApiError() {
         WeatherService service = new WeatherService();
         Map<String, Object> data = service.getWeather("InvalidCity");
         assertNull("Data should be null for invalid city", data);
